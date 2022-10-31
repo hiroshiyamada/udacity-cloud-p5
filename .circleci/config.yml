@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   linting:
@@ -16,3 +16,8 @@ jobs:
           command: |
             ./hadolint Dockerfile
             pylint --disable=R,C,W1203,W1202 app.py
+
+workflows:
+  default:
+    jobs:
+      - linting
