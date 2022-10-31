@@ -1,6 +1,7 @@
-version: 2
+version: 2.1
+
 jobs:
-  build:
+  linting:
     docker:
       - image: python:3.7.3-stretch
     steps:
@@ -14,3 +15,4 @@ jobs:
           name: run lint
           command: |
             ./hadolint Dockerfile
+            pylint --disable=R,C,W1203,W1202 app.py
