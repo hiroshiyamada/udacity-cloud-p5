@@ -17,8 +17,17 @@ jobs:
           command: |
             ./hadolint Dockerfile
             pylint --disable=R,C,W1203,W1202,W0613 app.py
-
+  build_docker:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: build docker
+          command: |
+            docker build --tag=udacity-capstone .
 workflows:
   default:
     jobs:
       - linting
+      - build_docker
