@@ -17,18 +17,25 @@ jobs:
           command: |
             ./hadolint Dockerfile
             pylint --disable=R,C,W1203,W1202,W0613 app.py
-  build_docker:
+  build_and_deploy_docker_app:
     docker:
-      - image: python:3.7.3-stretch
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: build docker
           command: |
-            docker build --tag=udacity-capstone .
+            docker build -t udacity-capstone .
+      - run:
+          name: push docker
+          command: |
+            dockerpath="${DOCKERHUB_USER}/udacity-capstone"
+            docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
+            docker tag udacity-capstone ${DOCKERHUB_USER}/udacity-capstone:latest
+            docker push ${DOCKERHUB_USER}/udacity-capstone:latest
+
 workflows:
   default:
     jobs:
       - linting
-      - build_docker
