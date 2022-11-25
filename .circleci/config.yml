@@ -159,7 +159,7 @@ workflows:
       - aws-eks/update-container-image:
           cluster-name: eks-udacity-capstone
           container-image-updates: "blue=cybermech/udacity-capstone-blue:latest"
-          resource-name: blue-deployment
+          resource-name: deployment/blue-deployment
           requires:
             - deploy-blue
       - linting-for-green
@@ -176,6 +176,6 @@ workflows:
       - aws-eks/update-container-image:
           cluster-name: eks-udacity-capstone
           container-image-updates: "green=cybermech/udacity-capstone-green:latest"
-          resource-name: green-deployment
+          resource-name: deployment/green-deployment
           requires:
             - update-lb-for-green
