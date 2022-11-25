@@ -78,7 +78,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: blue/blue_deployment.json
-          resource-name: deployment/blue-deployment
+          resource-name: deployment/blue
 
   linting-for-green:
     docker:
@@ -127,7 +127,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: green/green_deployment.json
-          resource-name: deployment/green-deployment
+          resource-name: deployment/green
   update-lb-for-green:
     docker:
       - image: "cimg/python:3.10"
@@ -159,7 +159,7 @@ workflows:
       - aws-eks/update-container-image:
           cluster-name: eks-udacity-capstone
           container-image-updates: "blue=cybermech/udacity-capstone-blue:latest"
-          resource-name: deployment/blue-deployment
+          resource-name: deployment/blue
           requires:
             - deploy-blue
       - linting-for-green
@@ -176,6 +176,6 @@ workflows:
       - aws-eks/update-container-image:
           cluster-name: eks-udacity-capstone
           container-image-updates: "green=cybermech/udacity-capstone-green:latest"
-          resource-name: deployment/green-deployment
+          resource-name: deployment/green
           requires:
             - update-lb-for-green
