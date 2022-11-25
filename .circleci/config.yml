@@ -152,7 +152,7 @@ workflows:
             - build_and_deploy_blue_docker_app
       - create-lb-for-blue:
           requires:
-            - create-cluster
+            - create-small-cluster
       - deploy-blue:
           requires:
             - create-lb-for-blue
