@@ -6,5 +6,5 @@ def app(environ, start_response):
     return [b"Hello Blue, my name is Hiroshi.\n"]
 
 
-httpd = make_server('0.0.0.0', 8080, app) linter will fail!
+httpd = make_server('0.0.0.0', 8080, app)
 httpd.serve_forever()
