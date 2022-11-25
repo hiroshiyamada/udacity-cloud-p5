@@ -75,7 +75,7 @@ jobs:
           resource-name: blue-deployment
 
 workflows:
-  default:
+  deployment:
     jobs:
       - linting
       - build_and_deploy_docker_app
