@@ -42,7 +42,7 @@ jobs:
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
             docker tag udacity-capstone-blue ${DOCKERHUB_USER}/udacity-capstone-blue:latest
             docker push ${DOCKERHUB_USER}/udacity-capstone-blue:latest
-  create-cluster:
+  create-small-cluster:
     docker:
       - image: "cimg/python:3.10"
     steps:
@@ -147,7 +147,7 @@ workflows:
       - build_and_deploy_blue_docker_app:
           requires:
             - linting-for-blue
-      - create-cluster:
+      - create-small-cluster:
           requires:
             - build_and_deploy_blue_docker_app
       - create-lb-for-blue:
