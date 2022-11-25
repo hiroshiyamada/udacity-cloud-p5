@@ -79,15 +79,6 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: blue/blue_deployment.json
           resource-name: blue-deployment
-  update-blue-container:
-    docker:
-      - image: "cimg/python:3.10"
-    steps:
-      - checkout
-      - aws-eks/update-container-image:
-          cluster-name: eks-udacity-capstone
-          container-image-updates: "blue=cybermech/udacity-capstone-blue:latest"
-          resource-name: blue-deployment
 
   linting-for-green:
     docker:
@@ -148,18 +139,9 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: green_services.json
           resource-name: blue-green-lb
-  update-green-container:
-    docker:
-      - image: "cimg/python:3.10"
-    steps:
-      - checkout
-      - aws-eks/update-container-image:
-          cluster-name: eks-udacity-capstone
-          container-image-updates: "green=cybermech/udacity-capstone-green:latest"
-          resource-name: green-deployment
 
 workflows:
-  deployment:
+  blue-green-deployment:
     jobs:
       - linting-for-blue
       - build_and_deploy_blue_docker_app:
@@ -174,7 +156,10 @@ workflows:
       - deploy-blue:
           requires:
             - create-lb-for-blue
-      - update-blue-container:
+      - aws-eks/update-container-image:
+          cluster-name: eks-udacity-capstone
+          container-image-updates: "blue=cybermech/udacity-capstone-blue:latest"
+          resource-name: blue-deployment
           requires:
             - deploy-blue
       - linting-for-green
@@ -188,6 +173,9 @@ workflows:
       - update-lb-for-green:
           requires:
             - deploy-green
-      - update-green-container:
+      - aws-eks/update-container-image:
+          cluster-name: eks-udacity-capstone
+          container-image-updates: "green=cybermech/udacity-capstone-green:latest"
+          resource-name: green-deployment
           requires:
             - update-lb-for-green
