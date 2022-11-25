@@ -67,7 +67,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: blue/blue_services.json
-          resource-name: blue-green-lb
+          resource-name: service/blue-green-lb
   deploy-blue:
     docker:
       - image: "cimg/python:3.10"
@@ -78,7 +78,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: blue/blue_deployment.json
-          resource-name: blue-deployment
+          resource-name: deployment/blue-deployment
 
   linting-for-green:
     docker:
@@ -127,7 +127,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: green/green_deployment.json
-          resource-name: green-deployment
+          resource-name: deployment/green-deployment
   update-lb-for-green:
     docker:
       - image: "cimg/python:3.10"
@@ -138,7 +138,7 @@ jobs:
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: green/green_services.json
-          resource-name: blue-green-lb
+          resource-name: service/blue-green-lb
 
 workflows:
   blue-green-deployment:
