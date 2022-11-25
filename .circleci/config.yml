@@ -40,7 +40,7 @@ jobs:
             cd blue
             dockerpath="${DOCKERHUB_USER}/udacity-capstone-blue"
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
-            docker tag udacity-capstone-blue ${DOCKERHUB_USER}/udacity-capstone:latest
+            docker tag udacity-capstone-blue ${DOCKERHUB_USER}/udacity-capstone-blue:latest
             docker push ${DOCKERHUB_USER}/udacity-capstone-blue:latest
   create-cluster:
     docker:
@@ -115,7 +115,7 @@ jobs:
             cd green
             dockerpath="${DOCKERHUB_USER}/udacity-capstone-green"
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
-            docker tag udacity-capstone-green ${DOCKERHUB_USER}/udacity-capstone:latest
+            docker tag udacity-capstone-green ${DOCKERHUB_USER}/udacity-capstone-green:latest
             docker push ${DOCKERHUB_USER}/udacity-capstone-green:latest
   deploy-green:
     docker:
