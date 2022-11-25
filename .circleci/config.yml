@@ -92,7 +92,6 @@ workflows:
       - aws-eks/update-container-image:
           cluster-name: eks-udacity-capstone
           container-image-updates: 'blue=cybermech/udacity-capstone:latest'
-          record: true
           requires:
             - create-deployment
           resource-name: blue-deployment
