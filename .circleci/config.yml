@@ -169,7 +169,7 @@ workflows:
       - deploy-green:
           requires:
             - build_and_deploy_green_docker_app
-            - update-blue-container
+            - deploy-blue
       - update-lb-for-green:
           requires:
             - deploy-green
