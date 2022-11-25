@@ -162,20 +162,20 @@ workflows:
           resource-name: deployment/blue
           requires:
             - deploy-blue
-      - linting-for-green
-      - build_and_deploy_green_docker_app:
-          requires:
-            - linting-for-green
-      - deploy-green:
-          requires:
-            - build_and_deploy_green_docker_app
-            - deploy-blue
-      - update-lb-for-green:
-          requires:
-            - deploy-green
-      - aws-eks/update-container-image:
-          cluster-name: eks-udacity-capstone
-          container-image-updates: "green=cybermech/udacity-capstone-green:latest"
-          resource-name: deployment/green
-          requires:
-            - update-lb-for-green
+      # - linting-for-green
+      # - build_and_deploy_green_docker_app:
+      #     requires:
+      #       - linting-for-green
+      # - deploy-green:
+      #     requires:
+      #       - build_and_deploy_green_docker_app
+      #       - deploy-blue
+      # - update-lb-for-green:
+      #     requires:
+      #       - deploy-green
+      # - aws-eks/update-container-image:
+      #     cluster-name: eks-udacity-capstone
+      #     container-image-updates: "green=cybermech/udacity-capstone-green:latest"
+      #     resource-name: deployment/green
+      #     requires:
+      #       - update-lb-for-green
