@@ -62,7 +62,7 @@ jobs:
           cluster-name: eks-udacity-capstone
           install-kubectl: true
       - kubernetes/create-or-update-resource:
-          resource-file-path: service.json
+          resource-file-path: services.json
           resource-name: blue-green-lb
   create-deployment:
     docker:
